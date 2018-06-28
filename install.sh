@@ -559,7 +559,7 @@ done
 mkdir -p ./Iota/volumes
 mkdir -p ./Iota/volumes/nelson.cli
 mkdir -p ./Iota/volumes/field.cli
-mkdir -p ./Iota/volumes/iri
+mkdir -p ./Iota/volumes/iri/mainnetdb
 
 if [ "$ipAddressConfigured" == "y" ]
 then
