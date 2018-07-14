@@ -6,9 +6,6 @@
 
 # Check Release version
 
-if [ "$1" == "" ]
-then
-
 drawlogo () {
 cat ~/Iota/logo
 }
@@ -78,6 +75,11 @@ ubuntuVersion=$(lsb_release -r -s)
 bionicVersion="False"
 
 testvercomp $ubuntuVersion 16.04 '<'
+
+if [ "$1" == "" ]
+then
+
+
 echo
 echo "Do you want to continue the installation?"
 read -p 'y/n: ' answer
