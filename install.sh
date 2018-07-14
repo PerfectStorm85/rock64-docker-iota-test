@@ -6,6 +6,9 @@
 
 # Check Release version
 
+if [ "$1" == "" ]
+then
+
 drawlogo () {
 cat ~/Iota/logo
 }
@@ -50,10 +53,10 @@ testvercomp () {
     esac
     if [[ $op != $3 ]]
     then
-	bionicVersion="True"
+	bionicVersion="False"
         #echo "FAIL: Expected '$3', Actual '$op', Arg1 '$1', Arg2 '$2'"
     else
-	bionicVersion="False"
+	bionicVersion="True"
         #echo "Pass: '$1 $op $2'"
     fi
 }
@@ -74,7 +77,7 @@ echo "You can cancel the installation at any time by typing: ctrl+c"
 ubuntuVersion=$(lsb_release -r -s)
 bionicVersion="False"
 
-testvercomp $ubuntuVersion 16.05 '<'
+testvercomp $ubuntuVersion 16.04 '<'
 echo
 echo "Do you want to continue the installation?"
 read -p 'y/n: ' answer
@@ -555,11 +558,30 @@ do
 	fi
 done
 
+# Automatic script input, skip the above section and immediately fill in the properties
+else
+
+nodename="$1"
+ipaddress="$2"
+netmaskAddress="255.255.255.0"
+gatewayAddress="$3"
+dnsAddress="$4"
+iriPort="$5"
+tcpPort="$6"
+udpPort="$7"
+nelsonPort="$8"
+nelsonAPIPort="$9"
+ciPort="$10"
+ngPort="$11"
+iotaDonation="$12"
+
+fi
+
 # Make directories if they are not yet there
 mkdir -p ./Iota/volumes
 mkdir -p ./Iota/volumes/nelson.cli
 mkdir -p ./Iota/volumes/field.cli
-mkdir -p ./Iota/volumes/iri/mainnetdb
+mkdir -p ./Iota/volumes/iri
 
 if [ "$ipAddressConfigured" == "y" ]
 then
@@ -665,8 +687,8 @@ echo  "port = $nelsonPort" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | 
 cat << "EOF" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | grep -q ".*"
 IRIHostname = iri
 ;UDP doesn't seem to work properly in a docker container (maybe https://github.com/iotaledger/iri/issues/276 ?)
-IRIProtocol = any
-;IRIProtocol = tcp
+;IRIProtocol = any
+IRIProtocol = tcp
 EOF
 echo  "IRIPort = $iriPort" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | grep -q ".*"
 echo  "TCPPort = $tcpPort" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | grep -q ".*"
@@ -743,6 +765,14 @@ echo "UDP: $udpPort"
 echo
 echo "Make sure you open all these ports on your router and the firewall is not blocking them!"
 echo
+
+# Kill the program if the settings were done automatically
+
+if [ "$1" != "" ]
+then
+        exit
+fi
+
 read -p 'Press any key to continue' anyKey
 echo
 clear
