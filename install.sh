@@ -81,8 +81,10 @@ testvercomp $ubuntuVersion 16.04 '<'
 echo
 echo "Do you want to continue the installation?"
 read -p 'y/n: ' answer
-if [ "$answer" == "y" ]
+if [ "$answer" != "y" ]
 then
+	exit
+fi
 
 clear
 echo
@@ -571,9 +573,9 @@ tcpPort="$6"
 udpPort="$7"
 nelsonPort="$8"
 nelsonAPIPort="$9"
-ciPort="$10"
-ngPort="$11"
-iotaDonation="$12"
+ciPort="${10}"
+ngPort="${11}"
+iotaDonation="${12}"
 
 fi
 
@@ -820,4 +822,3 @@ read -p 'y/n: ' startNode
 if [ "$startNode" == "y" ]
 then
 ./start.sh
-fi
