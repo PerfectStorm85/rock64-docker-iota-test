@@ -51,10 +51,8 @@ testvercomp () {
     if [[ $op != $3 ]]
     then
 	bionicVersion="False"
-        #echo "FAIL: Expected '$3', Actual '$op', Arg1 '$1', Arg2 '$2'"
     else
 	bionicVersion="True"
-        #echo "Pass: '$1 $op $2'"
     fi
 }
 
@@ -578,6 +576,8 @@ nelsonAPIPort="$9"
 ciPort="${10}"
 ngPort="${11}"
 iotaDonation="${12}"
+ipAddressConfigured="y"
+autoUpdateText="yes"
 
 fi
 
