@@ -50,9 +50,9 @@ testvercomp () {
     esac
     if [[ $op != $3 ]]
     then
-	bionicVersion="False"
-    else
 	bionicVersion="True"
+    else
+	bionicVersion="False"
     fi
 }
 
@@ -76,7 +76,6 @@ testvercomp $ubuntuVersion 16.04 '<'
 
 if [ "$1" == "" ]
 then
-
 
 echo
 echo "Do you want to continue the installation?"
@@ -578,6 +577,7 @@ ngPort="${11}"
 iotaDonation="${12}"
 ipAddressConfigured="y"
 autoUpdateText="yes"
+dynStatIP="2"
 
 fi
 
