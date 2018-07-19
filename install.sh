@@ -691,8 +691,8 @@ echo  "port = $nelsonPort" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | 
 cat << "EOF" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | grep -q ".*"
 IRIHostname = iri
 ;UDP doesn't seem to work properly in a docker container (maybe https://github.com/iotaledger/iri/issues/276 ?)
-;IRIProtocol = any
-IRIProtocol = tcp
+IRIProtocol = any
+;IRIProtocol = tcp
 EOF
 echo  "IRIPort = $iriPort" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | grep -q ".*"
 echo  "TCPPort = $tcpPort" | sudo tee -a ./Iota/volumes/nelson.cli/config.ini | grep -q ".*"
