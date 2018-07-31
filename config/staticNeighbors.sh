@@ -42,7 +42,7 @@ fi
 echo
 echo "Neighbor Added! $nb"
 nbors="$curNeighbors $nb"
-sed -i -e 's/^NEIGHBORS = .*$/NEIGHBORS = '"$nbors"'/g' ~/Iota/volumes/iri/iota.ini
+sed -i -e 's/^NEIGHBORS =.*$/NEIGHBORS = '"$nbors"'/g' ~/Iota/volumes/iri/iota.ini
 echo
 read -p "Press Enter to continue..." answer2
 
@@ -62,8 +62,27 @@ getCurrentNeighbors
 echo "Which Neighbor do you want to remove? Type in the number and press enter to remove"
 echo
 read -p 'Number: ' removeNr
-echo "To be implemented further!"
-
+if [ "$removeNr" == "" ]
+then
+	echo
+	echo "Aborted..."
+	echo
+	read -p 'Press Enter to return to the previous menu' answer4
+	break
+fi
+if [[ $removeNr =~ ^-?[0-9]+$ ]]
+then
+	[ ${curNeighborsArray[(($removeNr-1))]+abc} ] && validCheck="True"
+fi
+if [ "$validCheck" == "True" ]
+then
+	nbToRemove=${curNeighborsArray[(($removeNr-1))]}
+	sed -i -e 's/ '"$nbToRemove"'/''/g' ~/Iota/volumes/iri/iota.ini
+	echo
+	echo "Removed Neighbor $nbToRemove"
+	echo
+fi
+read -p 'Press Enter to return to the previous menu' answer4
 }
 
 while [ true ]
