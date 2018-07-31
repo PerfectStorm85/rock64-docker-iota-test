@@ -658,10 +658,10 @@ fi
 cat << "EOF" | sudo tee ./Iota/volumes/iri/iota.ini | grep -q ".*"
 [IRI]
 EOF
-echo  "PORT =$iriPort" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
-echo  "TCP_RECEIVER_PORT =$tcpPort" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
-echo  "UDP_RECEIVER_PORT =$udpPort" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
-echo  "NEIGHBORS =$neighbors" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
+echo  "PORT = $iriPort" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
+echo  "TCP_RECEIVER_PORT = $tcpPort" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
+echo  "UDP_RECEIVER_PORT = $udpPort" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
+echo  "NEIGHBORS = $neighbors" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
 cat << "EOF" | sudo tee -a ./Iota/volumes/iri/iota.ini | grep -q ".*"
 IXI_DIR = /iri/ixi/
 HEADLESS = true

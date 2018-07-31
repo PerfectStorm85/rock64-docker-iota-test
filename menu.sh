@@ -1,4 +1,51 @@
  #!/bin/bash
+configNode() {
+
+while [ true ]
+do
+
+clear
+echo
+echo "What would you like to cofigure?"
+echo
+echo "1. Node Name"
+echo "2. Network Settings"
+echo "3. Ports"
+echo "4. Donation address"
+echo "5. Automatic updates"
+echo "6. Static Neighbors"
+echo
+echo "0. Return to main menu"
+echo
+read -p "Option: " configAnswer
+case $configAnswer in
+	0)
+		break;;
+	1)
+		./config/nodeName.sh
+		read -p "Press enter to continue" answer2;;
+	2)
+		./config/networkSettings;;
+	3)
+		./config/ports.sh
+		read -p "Press enter to continue" answer2;;
+	4)
+		./config/donationAddress.sh
+		read -p "Press enter to continue" answer2;;
+	5)
+		echo "Automatic updates"
+		read -p "Press enter to continue" answer2;;
+	6)
+		echo "Static Neighbors"
+		read -p "Press enter to continue" answer2;;
+	*)
+		echo "Invalid Input..."
+		read -p "Press enter to continue" answer2;;
+esac
+
+done
+
+}
 
 readLogs() {
 
@@ -30,25 +77,31 @@ esac
 readMenuOption() {
 	case $1 in
 	0)
+		echo
 		echo "Exit...!"
+		echo
 		exit;;
 	1)
-		~/install.sh;;
+		~/install.sh
+		read -p "Press enter to continue" answer2;;
         2)
 		clear
-		~/start.sh;;
+		~/start.sh
+		read -p "Press enter to continue" answer2;;
 	3)
 		clear
-		~/stop.sh;;
+		~/stop.sh
+		read -p "Press enter to continue" answer2;;
 	4)
 		clear
 		~/Iota/download_mainnet_db.sh;;
 	5)
-		echo "Change Configs";;
+		configNode;;
 	6)
-		readLogs;;
+		readLogs
+		read -p "Press enter to continue" answer2;;
 esac
-	read -p "Press enter to continue" answer2
+
 }
 
 while [ "True" ]
