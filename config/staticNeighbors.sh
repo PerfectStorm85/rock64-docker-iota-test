@@ -95,7 +95,7 @@ echo
 echo "1. Add Neighbors"
 echo "2. Remove Neighbors"
 echo
-echo "0. Return to main menu"
+echo "0. Return to previous menu"
 echo
 read -p "Option: " answer
 case $answer in

@@ -288,9 +288,10 @@ fi
 fi
 fi
 
-if [ "$bionicVersion" == "True" ]
+if [ "$bionicVersion" == "True" ] && [ "$ipAddressConfigured" == "y" ]
 then
 	netplan apply
-else
+elif [ "$ipAddressConfigured" == "y" ]
+then
 	ifdown -a && ip addr flush eth0 && ifup -a
 fi

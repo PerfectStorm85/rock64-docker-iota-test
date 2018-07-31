@@ -25,7 +25,7 @@ case $configAnswer in
 		./config/nodeName.sh
 		read -p "Press enter to continue" answer2;;
 	2)
-		./config/networkSettings;;
+		./config/networkSettings.sh;;
 	3)
 		./config/ports.sh
 		read -p "Press enter to continue" answer2;;
@@ -33,11 +33,10 @@ case $configAnswer in
 		./config/donationAddress.sh
 		read -p "Press enter to continue" answer2;;
 	5)
-		echo "Automatic updates"
+		./config/automaticUpdates.sh
 		read -p "Press enter to continue" answer2;;
 	6)
-		./config/staticNeighbors.sh
-		read -p "Press enter to continue" answer2;;
+		./config/staticNeighbors.sh;;
 	*)
 		echo "Invalid Input..."
 		read -p "Press enter to continue" answer2;;

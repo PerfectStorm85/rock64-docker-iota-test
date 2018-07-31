@@ -24,9 +24,9 @@ then
 fi
 
 content=$(wget https://www.Rock64Iota.com/Iota/IRIVersion.html -q -O -)
-curVersion=$(cat ./Iota/CurVersion.ini)
+curVersion=$(cat ~/Iota/CurVersion.ini)
 
-cd Iota
+cd ~/Iota
 docker-compose stop
 autoUpdate=$(cat autoUpdate.conf)
 
