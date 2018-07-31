@@ -36,7 +36,7 @@ case $configAnswer in
 		echo "Automatic updates"
 		read -p "Press enter to continue" answer2;;
 	6)
-		echo "Static Neighbors"
+		./config/staticNeighbors.sh
 		read -p "Press enter to continue" answer2;;
 	*)
 		echo "Invalid Input..."
