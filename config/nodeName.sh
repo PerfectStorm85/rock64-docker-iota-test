@@ -10,9 +10,7 @@ echo
 read -p 'y/n: ' answer
 if [ "$answer" != "y" ]
 then
-	echo
-	echo "Exit..."
-	echo
+	clear
 	exit
 fi
 echo
@@ -35,6 +33,7 @@ do
 		echo
 		echo "Node name changed to: $nodename"
 		echo
+		read -p "Press Enter to continue..." answer5
 		break
 	fi
 done

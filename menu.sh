@@ -22,8 +22,7 @@ case $configAnswer in
 	0)
 		break;;
 	1)
-		./config/nodeName.sh
-		read -p "Press enter to continue" answer2;;
+		./config/nodeName.sh;;
 	2)
 		./config/networkSettings.sh;;
 	3)
@@ -48,6 +47,8 @@ done
 
 readLogs() {
 
+while [ true ]
+do
 clear
 echo
 echo "Which logs do you want to see?"
@@ -57,48 +58,63 @@ echo "2. Nelson Cli"
 echo "3. Nelson Gui"
 echo "4. CarrIOTA Field"
 echo
+echo "0. Return to main menu"
+echo
 read -p "Option: " logsAnswer
 
 case $logsAnswer in
+	0)
+		clear
+		break;;
 	1)
-		docker logs iota_iri;;
+		docker logs iota_iri
+		read -p "Press enter to continue" answer2;;
 	2)
-		docker logs iota_nelson.cli;;
+		docker logs iota_nelson.cli
+		read -p "Press enter to continue" answer2;;
 	3)
-		docker logs iota_nelson.gui;;
+		docker logs iota_nelson.gui
+		read -p "Press enter to continue" answer2;;
 	4)
-		docker logs iota_field.cli;;
+		docker logs iota_field.cli
+		read -p "Press enter to continue" answer2;;
 	*)
 		echo "Unknown entree: $logsAnswer"
+		read -p "Press enter to continue" answer2;;
 esac
+done
 }
 
 readMenuOption() {
 	case $1 in
-	0)
+	Q)
 		echo
 		echo "Exit...!"
 		echo
 		exit;;
-	1)
+	q)
+		echo
+		echo "Exit...!"
+		echo
+		exit;;
+	0)
 		~/install.sh
 		read -p "Press enter to continue" answer2;;
-        2)
+        1)
 		clear
 		~/start.sh
 		read -p "Press enter to continue" answer2;;
-	3)
+	2)
 		clear
 		~/stop.sh
 		read -p "Press enter to continue" answer2;;
-	4)
+	3)
 		clear
 		~/Iota/download_mainnet_db.sh;;
-	5)
+	4)
 		configNode;;
-	6)
+	5)
 		readLogs
-		read -p "Press enter to continue" answer2;;
 esac
 
 }
@@ -110,17 +126,17 @@ do
 	echo "Welcome to the Rock64 Main Menu."
 	echo "What would you like to do?"
 	echo
-	echo "1. (Re)Install Node"
+	echo "0. (Re)Install Node"
 	echo
-	echo "2. Start Node"
-	echo "3. Stop Node"
-	echo "4. (Re)download Database"
+	echo "1. Start Node"
+	echo "2. Stop Node"
+	echo "3. (Re)download Database"
 	echo
 	echo "Advanced settings:"
-	echo "5. Change Node configurations"
-	echo "6. View log files"
+	echo "4. Change Node configurations"
+	echo "5. View log files"
 	echo
-	echo "0. Exit"
+	echo "Q. Exit"
 	echo
 	read -p "Option: " answer
 	readMenuOption $answer

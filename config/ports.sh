@@ -45,7 +45,7 @@ then
         sed -i -e 's/-p $curNelsonGuiPort/-p '$nelsonGuiPort'/g' ~/Iota/docker-compose.yml
 	sed -i -e 's/$curNelsonGuiPort:$curNelsonGuiPort/'$nelsonGuiPort':'$nelsonGuiPort'/g' ~/Iota/docker-compose.yml
         echo
-        echo "Nelson Gui Port set to $nelsonGuiPort"
+        echo "Nelson Gui Port set to $nelsonGUIPort"
         echo
         read -p "Press Enter to continue" answer2
         break
@@ -74,10 +74,10 @@ echo
 read -p 'y/n ' tcpAnswer
 if [ "$tcpAnswer" == "y" ]
 then
-        sed -i -e 's/TCP_RECEIVER_PORT = $curTCPPort/TCP_RECEIVER_PORT = '$TCPPort'/g' ~/Iota/volumes/iri/iota.ini
-        sed -i -e 's/TCPPort = $curTCPPort/TCPPort = '$TCPPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+        sed -i -e 's/TCP_RECEIVER_PORT = $curTCPPort/TCP_RECEIVER_PORT = '$tcpPort'/g' ~/Iota/volumes/iri/iota.ini
+        sed -i -e 's/TCPPort = $curTCPPort/TCPPort = '$tcpPort'/g' ~/Iota/volumes/nelson.cli/config.ini
         echo
-        echo "TCP Port set to $TCPPort"
+        echo "TCP Port set to $tcpPort"
         echo
         read -p "Press Enter to continue" answer2
         break
@@ -95,7 +95,7 @@ echo
 while [ true ]
 do
 read -p "Port: " udpPort
-if [ "$udpPort" == ""
+if [ "$udpPort" == "" ]
 then
 	udpPort="14600"
 	break
@@ -106,10 +106,10 @@ echo
 read -p 'y/n: ' udpAnswer
 if [ "$udpAnswer" == "y" ]
 then
-        sed -i -e 's/UDP_RECEIVER_PORT = $curUDPPort/UDP_RECEIVER_PORT = '$UDPPort'/g' ~/Iota/volumes/iri/iota.ini
-        sed -i -e 's/UDPPort = $curUDPPort/UDPPort = '$UDPPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+        sed -i -e 's/UDP_RECEIVER_PORT = $curUDPPort/UDP_RECEIVER_PORT = '$udpPort'/g' ~/Iota/volumes/iri/iota.ini
+        sed -i -e 's/UDPPort = $curUDPPort/UDPPort = '$udpPort'/g' ~/Iota/volumes/nelson.cli/config.ini
         echo
-        echo "UDP Port set to $UDPPort"
+        echo "UDP Port set to $udpPort"
         echo
         read -p "Press Enter to continue" answer2
         break
@@ -127,7 +127,7 @@ echo
 while [ true ]
 do
 read -p "Port: " fieldPort
-if [ "$fieldPort" == "" ]]
+if [ "$fieldPort" == "" ]
 then
 	fieldPort="21310"
 	break
@@ -240,7 +240,7 @@ then
 	sed -i -e 's/IRIPort = $curIRIPort/IRIPort = '$iriPort'/g' ~/Iota/volumes/nelson.cli/config.ini
 	sed -i -e 's/PORT = $curIRIPort/PORT = '$iriPort'/g' ~/Iota/volumes/iri/iota.ini
 	echo
-	echo "Nelson API set to $nelsonAPIPort"
+	echo "IRI Port set to $iriPort"
         echo
         read -p "Press Enter to continue" answer2
 	break
