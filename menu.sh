@@ -26,8 +26,7 @@ case $configAnswer in
 	2)
 		./config/networkSettings.sh;;
 	3)
-		./config/ports.sh
-		read -p "Press enter to continue" answer2;;
+		./config/ports.sh;;
 	4)
 		./config/donationAddress.sh
 		read -p "Press enter to continue" answer2;;

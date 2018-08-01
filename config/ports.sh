@@ -31,19 +31,20 @@ echo
 while [ true ]
 do
 read -p "Port: " nelsonGUIPort
+nelsonGuiAnswer="y"
 if [ "$nelsonGUIPort" == "" ]
 then
-nelsonGUIPort="5000"
-break
+	nelsonGUIPort="5000"
+else
+	echo
+	echo "$nelsonGUIPort - Is this correct?"
+	echo
+	read -p "y/n: " nelsonGuiAnswer
 fi
-echo
-echo "$nelsonGUIPort - Is this correct?"
-echo
-read -p "y/n: " nelsonGuiAnswer
 if [ "$nelsonGuiAnswer" == "y" ]
 then
-        sed -i -e 's/-p $curNelsonGuiPort/-p '$nelsonGuiPort'/g' ~/Iota/docker-compose.yml
-	sed -i -e 's/$curNelsonGuiPort:$curNelsonGuiPort/'$nelsonGuiPort':'$nelsonGuiPort'/g' ~/Iota/docker-compose.yml
+        sed -i -e 's/-p '$curNelsonGuiPort'/-p '$nelsonGUIPort'/g' ~/Iota/docker-compose.yml
+	sed -i -e 's/'$curNelsonGuiPort':'$curNelsonGuiPort'/'$nelsonGUIPort':'$nelsonGUIPort'/g' ~/Iota/docker-compose.yml
         echo
         echo "Nelson Gui Port set to $nelsonGUIPort"
         echo
@@ -63,19 +64,20 @@ echo
 while [ true ]
 do
 read -p 'Port: ' tcpPort
+tcpAnswer="y"
 if [ "$tcpPort" == "" ]
 then
-tcpPort="15600"
-break
+	tcpPort="15600"
+else
+	echo
+	echo "$tcpPort - Is this correct?"
+	echo
+	read -p 'y/n ' tcpAnswer
 fi
-echo
-echo "$tcpPort - Is this correct?"
-echo
-read -p 'y/n ' tcpAnswer
 if [ "$tcpAnswer" == "y" ]
 then
-        sed -i -e 's/TCP_RECEIVER_PORT = $curTCPPort/TCP_RECEIVER_PORT = '$tcpPort'/g' ~/Iota/volumes/iri/iota.ini
-        sed -i -e 's/TCPPort = $curTCPPort/TCPPort = '$tcpPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+        sed -i -e 's/TCP_RECEIVER_PORT = '$curTCPPort'/TCP_RECEIVER_PORT = '$tcpPort'/g' ~/Iota/volumes/iri/iota.ini
+        sed -i -e 's/TCPPort = '$curTCPPort'/TCPPort = '$tcpPort'/g' ~/Iota/volumes/nelson.cli/config.ini
         echo
         echo "TCP Port set to $tcpPort"
         echo
@@ -95,19 +97,20 @@ echo
 while [ true ]
 do
 read -p "Port: " udpPort
+udpAnswer="y"
 if [ "$udpPort" == "" ]
 then
 	udpPort="14600"
-	break
-	fi
-echo
-echo "$udpPort - Is this correct?"
-echo
-read -p 'y/n: ' udpAnswer
+else
+	echo
+	echo "$udpPort - Is this correct?"
+	echo
+	read -p 'y/n: ' udpAnswer
+fi
 if [ "$udpAnswer" == "y" ]
 then
-        sed -i -e 's/UDP_RECEIVER_PORT = $curUDPPort/UDP_RECEIVER_PORT = '$udpPort'/g' ~/Iota/volumes/iri/iota.ini
-        sed -i -e 's/UDPPort = $curUDPPort/UDPPort = '$udpPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+        sed -i -e 's/UDP_RECEIVER_PORT = '$curUDPPort'/UDP_RECEIVER_PORT = '$udpPort'/g' ~/Iota/volumes/iri/iota.ini
+        sed -i -e 's/UDPPort = '$curUDPPort'/UDPPort = '$udpPort'/g' ~/Iota/volumes/nelson.cli/config.ini
         echo
         echo "UDP Port set to $udpPort"
         echo
@@ -127,19 +130,20 @@ echo
 while [ true ]
 do
 read -p "Port: " fieldPort
+fieldAnswer="y"
 if [ "$fieldPort" == "" ]
 then
 	fieldPort="21310"
-	break
+else
+	echo
+	echo "$fieldPort - Is this correct?"
+	echo
+	read -p 'y/n: ' fieldAnswer
 fi
-echo
-echo "$fieldPort - Is this correct?"
-echo
-read -p 'y/n: ' fieldAnswer
 if [ "$fieldAnswer" == "y" ]
 then
-        sed -i -e 's/$curFieldPort:$curFieldPort/'$fieldPort':'$fieldPort'/g' ~/Iota/docker-compose.yml
-        sed -i -e 's/port = $curFieldPort/port = '$fieldPort'/g' ~/Iota/volumes/field.cli/config.ini
+        sed -i -e 's/'$curFieldPort':'$curFieldPort'/'$fieldPort':'$fieldPort'/g' ~/Iota/docker-compose.yml
+        sed -i -e 's/port = '$curFieldPort'/port = '$fieldPort'/g' ~/Iota/volumes/field.cli/config.ini
         echo
         echo "CarrIOTA Field Port set to $fieldPort"
         echo
@@ -160,19 +164,20 @@ echo
 while [ true ]
 do
 read -p "Port: " nelsonPort
+nelsonAnswer="y"
 if [ "$nelsonPort" == "" ]
 then
 	nelsonPort="16600"
-	break
+else
+	echo
+	echo "$nelsonPort - Is this correct?"
+	echo
+	read -p "y/n: " nelsonAnswer
 fi
-echo
-echo "$nelsonPort - Is this correct?"
-echo
-read -p "y/n: " nelsonAnswer
 if [ "$nelsonAnswer" == "y" ]
 then
-	sed -i -e 's/$curNelsonPort:$curNelsonPort/'$nelsonPort':'$nelsonPort'/g' ~/Iota/docker-compose.yml
-        sed -i -e 's/port = $curNelsonPort/port = '$nelsonPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+	sed -i -e 's/'$curNelsonCliPort':'$curNelsonCliPort'/'$nelsonPort':'$nelsonPort'/g' ~/Iota/docker-compose.yml
+        sed -i -e 's/port = '$curNelsonCliPort'/port = '$nelsonPort'/g' ~/Iota/volumes/nelson.cli/config.ini
         echo
         echo "Nelson Client Port set to $nelsonPort"
         echo
@@ -192,19 +197,21 @@ echo
 while [ true ]
 do
 read -p "Port: " nelsonAPIPort
+nelsonAPIAnswer="y"
 if [ "$nelsonAPIPort" == "" ]
 then
 	nelsonAPIPort="18600"
-	break
+else
+	echo
+	echo "$nelsonAPIPort - Is this correct?"
+	echo
+	read -p "y/n: " nelsonAPIAnswer
 fi
-echo
-echo "$nelsonAPIPort - Is this correct?"
-echo
-read -p "y/n: " nelsonAPIAnswer
 if [ "$nelsonAPIAnswer" == "y" ]
 then
-	sed -i -e 's/$curNelsonAPIPort:$curNelsonAPIPort/'$nelsonAPIPort':'$nelsonAPIPort'/g' ~/Iota/docker-compose.yml
-	sed -i -e 's/apiPort = $curNelsonAPIPort/apiPort = '$nelsonAPIPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+	sed -i -e 's/'$curNelsonAPIPort':'$curNelsonAPIPort'/'$nelsonAPIPort':'$nelsonAPIPort'/g' ~/Iota/docker-compose.yml
+	sed -i -e 's/--apiPort '$curNelsonAPIPort'/--apiPort '$nelsonAPIPort'/g' ~/Iota/docker-compose.yml
+	sed -i -e 's/apiPort = '$curNelsonAPIPort'/apiPort = '$nelsonAPIPort'/g' ~/Iota/volumes/nelson.cli/config.ini
 	echo
 	echo "Nelson API Port set to $nelsonAPIPort"
 	echo
@@ -219,26 +226,27 @@ configIRI(){
 clear
 echo
 echo "Enter IRI Port - Current: $curIRIPort"
-echo "Leave empty to use the default 14625"
+echo "Leave empty to use the default 14265"
 echo
 while [ true ]
 do
 read -p 'Port: ' iriPort
-if [ "$iriPort" == "" ]
+iriPortAnswer="y"
+if [ "$iriPort" != "" ]
 then
-iriPort="14265"
-break
+	echo
+	echo "$iriPort - Is this correct?"
+	echo
+	read -p 'y/n: ' iriPortAnswer
+else
+	iriPort="14265"
 fi
-echo
-echo "$iriPort - Is this correct?"
-echo
-read -p 'y/n ' iriPortAnswer
 if [ "$iriPortAnswer" == "y" ]
 then
-	sed -i -e 's/$curIRIPort:$curIRIPort/'$iriPort':'$iriPort'/g' ~/Iota/docker-compose.yml
-	sed -i -e 's/IRIPort = $curIRIPort/IRIPort = '$iriPort'/g' ~/Iota/volumes/field.cli/config.ini
-	sed -i -e 's/IRIPort = $curIRIPort/IRIPort = '$iriPort'/g' ~/Iota/volumes/nelson.cli/config.ini
-	sed -i -e 's/PORT = $curIRIPort/PORT = '$iriPort'/g' ~/Iota/volumes/iri/iota.ini
+	sed -i -e 's/'$curIRIPort':'$curIRIPort'/'$iriPort':'$iriPort'/g' ~/Iota/docker-compose.yml
+	sed -i -e 's/IRIPort = '$curIRIPort'/IRIPort = '$iriPort'/g' ~/Iota/volumes/field.cli/config.ini
+	sed -i -e 's/IRIPort = '$curIRIPort'/IRIPort = '$iriPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+	sed -i -e 's/PORT = '$curIRIPort'/PORT = '$iriPort'/g' ~/Iota/volumes/iri/iota.ini
 	echo
 	echo "IRI Port set to $iriPort"
         echo
