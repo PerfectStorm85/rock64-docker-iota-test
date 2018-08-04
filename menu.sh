@@ -122,6 +122,7 @@ then
 	docker-compose down
 	rm ./updateScript*
 	wget https://rock64iota.com/Iota/updateScript.sh
+	chmod +x ./updateScript.sh
 	./updateScript.sh
 	docker stop $(docker ps -a -q)
 	# Delete all containers
