@@ -84,6 +84,56 @@ esac
 done
 }
 
+downloadDB(){
+
+echo
+echo "WARNING"
+echo "This will remove the old database and download a fresh one."
+echo
+echo "Are you sure you want to continue?"
+echo
+read -p "y/n: " ddAnswer
+if [ "$ddAnswer" = "y" ]
+then
+	echo
+	echo "Stopping IRI..."
+	echo
+	~/stop.sh
+	echo
+	~/Iota/download_mainnet_db.sh
+fi
+}
+
+updateNode(){
+
+clear
+echo
+echo "This will (force) update all docker containers."
+echo "Do you want to continue?"
+echo
+read -p 'y/n: ' updateAnswer
+if [ "$updateAnswer" = "y" ]
+then
+	echo
+	echo "Updating..."
+	docker-compose stop
+	docker-compose down
+	docker stop $(docker ps -a -q)
+	# Delete all containers
+	docker rm $(docker ps -a -q)
+	# Delete all images
+ 	docker rmi $(docker images -q)
+	docker container prune -f
+	~/start.sh
+	echo "$latestversion" | sudo tee ~/Iota/CurVersion.ini | grep -q ".*"
+	echo
+	echo "Update finished!"
+	echo
+	read -p "Press enter to continue"
+fi
+
+}
+
 readMenuOption() {
 	case $1 in
 	Q)
@@ -108,31 +158,28 @@ readMenuOption() {
 		~/stop.sh
 		read -p "Press enter to continue" answer2;;
 	3)
-		clear
-		echo
-		echo "WARNING"
-		echo "This will remove the old database and download a fresh one."
-		echo
-		echo "Are you sure you want to do this?"
-		read -p 'y/n: ' ddAnswer
-		if [ "$ddAnswer" == "y" ]
-		then
-			~/Iota/download_mainnet_db.sh
-		fi
-		echo;;
+		downloadDB;;
 	4)
 		configNode;;
 	5)
-		readLogs
+		readLogs;;
+	6)
+		updateNode;;
 esac
 
 }
 
 while [ "True" ]
 do
+	curVersion=$(cat ~/Iota/CurVersion.ini)
+	latestVersion=$(curl -s https://rock64Iota.com/Iota/IRIVersion.html)
+	if [ "$curVersion" == "" ]
+	then
+		curVersion="Unknown"
+	fi
 	clear
 	echo
-	echo "Welcome to the Rock64 Main Menu."
+	echo "Welcome to the Rock64 Main Menu. Version: $curVersion"
 	echo "What would you like to do?"
 	echo
 	echo "0. (Re)Install Node"
@@ -144,6 +191,8 @@ do
 	echo "Advanced settings:"
 	echo "4. Change Node configurations"
 	echo "5. View log files"
+	echo
+	echo "6. Update (Force) - Latest version: $latestVersion"
 	echo
 	echo "Q. Exit"
 	echo
