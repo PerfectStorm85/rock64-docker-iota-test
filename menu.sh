@@ -109,7 +109,17 @@ readMenuOption() {
 		read -p "Press enter to continue" answer2;;
 	3)
 		clear
-		~/Iota/download_mainnet_db.sh;;
+		echo
+		echo "WARNING"
+		echo "This will remove the old database and download a fresh one."
+		echo
+		echo "Are you sure you want to do this?"
+		read -p 'y/n: ' ddAnswer
+		if [ "$ddAnswer" == "y" ]
+		then
+			~/Iota/download_mainnet_db.sh
+		fi
+		echo;;
 	4)
 		configNode;;
 	5)
@@ -127,7 +137,7 @@ do
 	echo
 	echo "0. (Re)Install Node"
 	echo
-	echo "1. Start Node"
+	echo "1. (Re)Start Node"
 	echo "2. Stop Node"
 	echo "3. (Re)download Database"
 	echo
