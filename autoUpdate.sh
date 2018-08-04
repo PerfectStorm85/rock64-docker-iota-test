@@ -33,16 +33,16 @@ do
                 #I will never use this method to push harmful content to your device!
 
                 ./$updateScript
-                echo "Updating... Disabeling IRI, Nelson and Field..."
-                docker-compose stop
-                docker-compose down
-                docker stop $(docker ps -a -q)
+                # echo "Updating... Disabeling IRI, Nelson and Field..."
+                # docker-compose stop
+                #docker-compose down
+                #docker stop $(docker ps -a -q)
                 # Delete all containers
-                docker rm $(docker ps -a -q)
+                #docker rm $(docker ps -a -q)
                 # Delete all images
-                docker rmi $(docker images -q)
-                echo "Restarting IRI..."
-                docker-compose up -d
+                #docker rmi $(docker images -q)
+                #echo "Restarting IRI..."
+                #docker-compose up -d
                 rm ./$updateScript
         fi
         fi
