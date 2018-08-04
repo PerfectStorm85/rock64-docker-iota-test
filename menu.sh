@@ -116,6 +116,8 @@ if [ "$updateAnswer" = "y" ]
 then
 	echo
 	echo "Updating..."
+	echo
+	cd ~/Iota
 	docker-compose stop
 	docker-compose down
 	docker stop $(docker ps -a -q)
@@ -129,7 +131,7 @@ then
 	echo
 	echo "Update finished!"
 	echo
-	read -p "Press enter to continue"
+	read -p "Press enter to continue" updAns
 fi
 
 }
