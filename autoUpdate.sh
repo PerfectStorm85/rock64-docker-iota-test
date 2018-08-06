@@ -32,7 +32,7 @@ do
                 #The update script is usually empty. But in case something else needs to be updated on the rock itself this script is called and executed.
                 #I will never use this method to push harmful content to your device!
 
-                ./$updateScript
+                ./$updateScript $curVersion
                 # echo "Updating... Disabeling IRI, Nelson and Field..."
                 # docker-compose stop
                 #docker-compose down

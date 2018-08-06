@@ -123,7 +123,7 @@ then
 	rm ./updateScript*
 	wget https://rock64iota.com/Iota/updateScript.sh
 	chmod +x ./updateScript.sh
-	./updateScript.sh
+	./updateScript.sh $curVersion
 	docker stop $(docker ps -a -q)
 	# Delete all containers
 	docker rm $(docker ps -a -q)
