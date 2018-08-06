@@ -44,6 +44,19 @@ done
 
 }
 
+printLogs(){
+
+if [ "$2" = "" ]
+then
+	docker logs "iota_$1"
+else
+	docker logs -f "iota_$1"
+fi
+echo
+read -p 'Press enter to continue' answer
+
+}
+
 readLogs() {
 
 while [ true ]
@@ -51,6 +64,10 @@ do
 clear
 echo
 echo "Which logs do you want to see?"
+echo "Add f to the option to follow the logs."
+echo "Example: 1f"
+echo
+echo "Use Ctrl+c to cancel following logs"
 echo
 echo "1. IRI"
 echo "2. Nelson Cli"
@@ -66,17 +83,21 @@ case $logsAnswer in
 		clear
 		break;;
 	1)
-		docker logs iota_iri
-		read -p "Press enter to continue" answer2;;
+		printLogs "iri";;
+	1f)
+		printLogs "iri" "-f";;
 	2)
-		docker logs iota_nelson.cli
-		read -p "Press enter to continue" answer2;;
+		printLogs "nelson.cli";;
+	2f)
+		printLogs "nelson.cli" "-f";;
 	3)
-		docker logs iota_nelson.gui
-		read -p "Press enter to continue" answer2;;
+		printLogs "nelson.gui";;
+	3f)
+		printLogs "nelson.gui" "-f";;
 	4)
-		docker logs iota_field.cli
-		read -p "Press enter to continue" answer2;;
+		printLogs "field.cli";;
+	4f)
+		printLogs "field.cli" "-f";;
 	*)
 		echo "Unknown entree: $logsAnswer"
 		read -p "Press enter to continue" answer2;;
