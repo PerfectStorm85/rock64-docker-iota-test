@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo
+echo "Starting services, please wait..."
+echo
 needsUpdateDB=$(cat ~/Iota/needsUpdateDB.ini)
 if [ "$needsUpdateDB" == "yes" ]
 then

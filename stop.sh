@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo
-echo "Stopping container files..."
+echo "Stopping services, please wait..."
 echo
 cd ~/Iota
 if [ "$1" == "" ]
