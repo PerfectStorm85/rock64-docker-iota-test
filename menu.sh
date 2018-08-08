@@ -185,7 +185,8 @@ readMenuOption() {
 		~/stop.sh
 		read -p "Press enter to continue" answer2;;
 	3)
-		downloadDB;;
+		downloadDB
+		read -p "Press enter to continue" answer2;;
 	4)
 		configNode;;
 	5)

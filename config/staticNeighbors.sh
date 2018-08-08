@@ -42,7 +42,7 @@ fi
 echo
 echo "Neighbor Added! $nb"
 nbors="$curNeighbors $nb"
-sed -i -e 's/^NEIGHBORS =.*$/NEIGHBORS = '"$nbors"'/g' ~/Iota/volumes/iri/iota.ini
+sed -i -e 's&^NEIGHBORS =.*$&NEIGHBORS = '"$nbors"'&g' ~/Iota/volumes/iri/iota.ini
 echo
 read -p "Press Enter to continue..." answer2
 
@@ -77,7 +77,7 @@ fi
 if [ "$validCheck" == "True" ]
 then
 	nbToRemove=${curNeighborsArray[(($removeNr-1))]}
-	sed -i -e 's/ '"$nbToRemove"'/''/g' ~/Iota/volumes/iri/iota.ini
+	sed -i -e 's& '"$nbToRemove"'&''&g' ~/Iota/volumes/iri/iota.ini
 	echo
 	echo "Removed Neighbor $nbToRemove"
 	echo
