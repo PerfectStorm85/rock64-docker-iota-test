@@ -60,14 +60,14 @@ then
 
         	./updateScript.sh $curVersion
 
-		echo "Updating... Disabeling IRI, Nelson and Field..."
-        	docker-compose stop
-	        docker-compose down
-        	docker stop $(docker ps -a -q)
+		#echo "Updating... Disabeling IRI, Nelson and Field..."
+        	#docker-compose stop
+	        #docker-compose down
+        	#docker stop $(docker ps -a -q)
 	        # Delete all containers
-        	docker rm $(docker ps -a -q)
+        	#docker rm $(docker ps -a -q)
 	        # Delete all images
-        	docker rmi $(docker images -q)
+        	#docker rmi $(docker images -q)
 	        rm ./updateScript.sh
 	fi
 	fi
