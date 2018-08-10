@@ -730,6 +730,7 @@ pow = yes
 disableIRI = false
 ; If you want Field to generate a custom id, instead of using machine-id
 customFieldId = true
+fieldHostname[] = field.deviota.com:80
 EOF
 
 cp ~/Iota/docker-composeBase.yml ~/Iota/docker-compose.yml
