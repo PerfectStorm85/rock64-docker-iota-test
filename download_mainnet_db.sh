@@ -7,6 +7,6 @@ echo "Delete old database..."
 rm -rf volumes/iri/mainnetdb/*
 
 echo "Download and unzipping latest database..."
-curl -L https://s3-eu-west-1.amazonaws.com/iota.partners/iri-mainnetdb.tar.gz | tar zx -C ~/Iota/volumes/iri/mainnetdb/
+curl -L https://x-vps.com/iota.db.tgz | tar zx -C ~/Iota/volumes/iri/mainnetdb/
 
 echo "...finished!"

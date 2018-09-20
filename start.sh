@@ -8,7 +8,7 @@ if [ "$needsUpdateDB" == "yes" ]
 then
         echo "The Database needs to be downloaded first."
 	echo "It is highly recommanded to do this before starting the node."
-        fileSize="$(curl -sI http://db.iota.partners/IOTA.partners-mainnetdb.tar.gz | grep Content-Length)"
+        fileSize="$(curl -sI https://x-vps.com/iota.db.tgz | grep Content-Length)"
         size=${fileSize#*: }
         echo
         echo "The database size is now:"
