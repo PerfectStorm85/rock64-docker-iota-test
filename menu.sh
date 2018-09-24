@@ -14,6 +14,7 @@ echo "3. Ports"
 echo "4. Donation address"
 echo "5. Automatic updates"
 echo "6. Static Neighbors"
+echo "7. Java heap size (memory use)"
 echo
 echo "0. Return to main menu"
 echo
@@ -35,6 +36,8 @@ case $configAnswer in
 		read -p "Press enter to continue" answer2;;
 	6)
 		./config/staticNeighbors.sh;;
+	7)
+		./config/memory.sh;;
 	*)
 		echo "Invalid Input..."
 		read -p "Press enter to continue" answer2;;
