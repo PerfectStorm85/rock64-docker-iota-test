@@ -10,6 +10,7 @@ curNelsonAPIPort=$(cat ~/Iota/docker-compose.yml | grep "apiPort" | grep -oP ".*
 curNelsonAPIPort=${curNelsonAPIPort%?}
 curNelsonGuiPort=$(cat ~/Iota/docker-compose.yml | grep "command: \"-p " | grep -oP ".*command: \"-p \K.*" | sed -n -e  's/ --apiHostname nelson.cli --apiPort.*//p')
 curNelsonCliPort=$(cat ~/Iota/volumes/nelson.cli/config.ini | grep "^port = " | grep -oP "port = \K.*")
+curMonitoringPort=$(cat ~/Iota/docker-compose.yml | grep "API_PORT_LOCATION=" | grep -oP "LOCATION=\K.*")
 
 #echo "IRI Port: $curIRIPort"
 #echo "TCP Port: $curTCPPort"
@@ -18,8 +19,44 @@ curNelsonCliPort=$(cat ~/Iota/volumes/nelson.cli/config.ini | grep "^port = " | 
 #echo "Nelson API Port: $curNelsonAPIPort"
 #echo "Nelson Gui Port: $curNelsonGuiPort"
 #echo "Nelson Cli Port: $curNelsonCliPort"
+#echo "Monitoring port: $curMonitoringPort"
 
 }
+
+configMonitoring(){
+
+clear
+echo
+echo "Enter Monitoring Port - Current: $curMonitoringPort"
+echo "Leave empty to use the default 14266"
+echo
+while [ true ]
+do
+	read -p "Port " monitoringPort
+	monitoringAnswer="y"
+	if [ "$monitoringPort" == "" ]
+	then
+		monitoringPort="14266"
+	else
+		echo
+		echo "$monitoringPort - Is this correct?"
+		echo
+		read -p "y/n " monitoringAnswer
+	fi
+	if [ "$monitoringAnswer" == "y" ]
+	then
+		sed -i -e 's/API_PORT_LOCATION='$curMonitoringPort'/API_PORT_LOCATION='$monitoringPort'/g' ~/Iota/docker-compose.yml
+		sed -i -e 's/IRIPort = '$curMonitoringPort'/IRIPort = '$monitoringPort'/g' ~/Iota/volumes/field.cli/config.ini
+		sed -i -e 's/IRIPort = '$curMonitoringPort'/IRIPort = '$monitoringPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+		echo
+		echo "Monitoring port set to: $monitoringPort"
+		echo
+		read -p "Press enter to continue " answer2
+		break
+	fi
+done
+}
+
 
 configNelsonGui(){
 
@@ -244,8 +281,7 @@ fi
 if [ "$iriPortAnswer" == "y" ]
 then
 	sed -i -e 's/'$curIRIPort':'$curIRIPort'/'$iriPort':'$iriPort'/g' ~/Iota/docker-compose.yml
-	sed -i -e 's/IRIPort = '$curIRIPort'/IRIPort = '$iriPort'/g' ~/Iota/volumes/field.cli/config.ini
-	sed -i -e 's/IRIPort = '$curIRIPort'/IRIPort = '$iriPort'/g' ~/Iota/volumes/nelson.cli/config.ini
+	sed -i -e 's/API_PORT_DESTINATION='$curIRIPort'/API_PORT_DESTINATION='$iriPort'/g' ~/Iota/docker-compose.yml
 	sed -i -e 's/PORT = '$curIRIPort'/PORT = '$iriPort'/g' ~/Iota/volumes/iri/iota.ini
 	echo
 	echo "IRI Port set to $iriPort"
@@ -266,6 +302,7 @@ configNelsonGui
 configField
 configTCP
 configUDP
+configMonitoring
 
 }
 
@@ -285,9 +322,10 @@ echo "2. IRI 			Current: $curIRIPort"
 echo "3. Nelson Cli 		Current: $curNelsonCliPort"
 echo "4. Nelson Gui 		Current: $curNelsonGuiPort"
 echo "5. CarrIOTA Field 	Current: $curFieldPort"
-echo "6. Nelson API 		Current: $curNelsonAPIPort"
+echo "6. Nelson API		Current: $curNelsonAPIPort"
 echo "7. TCP 			Current: $curTCPPort"
 echo "8. UDP 			Current: $curUDPPort"
+echo "9. Monitoring Port	Current: $curMonitoringPort"
 echo
 echo "0. Return to main menu"
 echo
@@ -311,6 +349,8 @@ case $answer in
 		configTCP;;
 	8)
 		configUDP;;
+	9)
+		configMonitoring;;
 	*)
 		echo "Invalid input detected"
 esac

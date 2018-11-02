@@ -6,12 +6,22 @@ services:
     image: perfectstorm85/rock64_iota_iri:latest
     hostname: iri
     restart: unless-stopped
+    environment:
+      - JAVA_MAX_MEMORY=3500m
+      - JAVA_MIN_MEMORY=256m
+      - DOCKER_IRI_MONITORING_API_PORT_ENABLE=1
+      - DOCKER_IRI_MONITORING_API_PORT_DESTINATION=14265
+      - DOCKER_IRI_MONITORING_API_PORT_LOCATION=14266
+      - DOCKER_IRI_REMOTE_LIMIT_API={"interruptAttachToTangle, attachToTangle, addNeighbors, removeNeighbors, getNeighbors"}
+    expose:
+      - "5556"
+      #- "14266"
+
     volumes:
       - ./volumes/iri/iota.ini:/iri/iota.ini:ro
       - ./volumes/iri/ixi:/iri/ixi:rw
       - ./volumes/iri/mainnetdb:/iri/mainnetdb:rw
       - /etc/localtime:/etc/localtime:ro
-    command: ["/usr/bin/java", "-XX:+DisableAttachMechanism", "-Xmx3500m", "-Xms256m", "-Dlogback.configurationFile=/iri/conf/logback.xml", "-Djava.net.preferIPv4Stack=true", "-jar", "iri.jar", "-c", "/iri.iota.ini"]
     ports:
       - "14600:14600/udp"
       - "15600:15600/tcp"

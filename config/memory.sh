@@ -1,7 +1,7 @@
 #!/bin/bash
 getCurrentSettings(){
-curHeapSize=$(cat ~/Iota/docker-compose.yml | grep "Xmx" | grep -oP "Xmx\K.*" | awk '{print $1;}')
-curHeapSize=${curHeapSize::-2}
+curHeapSize=$(cat ~/Iota/docker-compose.yml | grep "MAX_MEMORY" | grep -oP "MAX_MEMORY=\K.*") #| awk '{print $1;}')
+#curHeapSize=${curHeapSize::-2}
 echo "Current Java Heap Size: $curHeapSize"
 }
 
@@ -30,8 +30,8 @@ do
 	fi
 	if [ "$heapSizeAnswer" == "y" ]
 	then
-		sed -i -e 's/'$curHeapSize'/'$heapSize'/g' ~/Iota/docker-compose.yml
-		sed -i -e 's/'$curHeapSize'/'$heapSize'/g' ~/Iota/docker-composeBase.yml
+		sed -i -e 's/MAX_MEMORY='$curHeapSize'/MAX_MEMORY='$heapSize'/g' ~/Iota/docker-compose.yml
+		sed -i -e 's/MAX_MEMORY='$curHeapSize'/MAX_MEMORY='$heapSize'/g' ~/Iota/docker-composeBase.yml
 		echo
 		echo "Java Heap Size set to $heapSize"
 		echo
