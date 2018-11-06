@@ -3,7 +3,7 @@ version: "2"
 services:
   iri:
     container_name: iota_iri
-    image: perfectstorm85/rock64_iota_iri:latest
+    image: perfectstorm85/rock64_iota_iri:v1.5.5
     hostname: iri
     restart: unless-stopped
     environment:
