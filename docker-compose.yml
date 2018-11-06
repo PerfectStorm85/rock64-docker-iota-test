@@ -3,7 +3,7 @@ version: "2"
 services:
   iri:
     container_name: iota_iri
-    image: perfectstorm85/rock64_iota_iri:latest
+    image: perfectstorm85/rock64_iota_iri:v1.5.5
     hostname: iri
     restart: unless-stopped
     environment:
@@ -15,8 +15,6 @@ services:
       - DOCKER_IRI_REMOTE_LIMIT_API={"interruptAttachToTangle, attachToTangle, addNeighbors, removeNeighbors, getNeighbors"}
     expose:
       - "5556"
-      #- "14266"
-
     volumes:
       - ./volumes/iri/iota.ini:/iri/iota.ini:ro
       - ./volumes/iri/ixi:/iri/ixi:rw
@@ -26,6 +24,7 @@ services:
       - "14600:14600/udp"
       - "15600:15600/tcp"
       - "14265:14265"
+    command: ["-c","/iri/iota.ini"]
     logging:
       options:
         max-size: 1m
